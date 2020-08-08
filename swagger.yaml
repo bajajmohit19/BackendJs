@@ -1,0 +1,106 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Sociopool Task
+  description: Public API
+  contact:
+    email: temp@gmail.com
+  license:
+    name: Apache 2.0
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: localhost:8349
+
+basePath: /
+schemes:
+#  - https
+- http
+tags:
+- name: user
+  description: all functions related user accounts
+
+paths:
+  /user:
+    post:
+      tags:
+      - "user"
+      summary: add new user
+      operationId: adduser
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          type: object
+          properties:
+            userId:
+              type: number
+            distance:
+              type: number
+            date:
+              type: string
+              format: date-time
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            $ref: "#/definitions/ApiResponse"
+    
+  /user/{id}:
+    post:
+      tags:
+      - "user"
+      summary: Get user details
+      operationId: getUser
+      consumes:
+      - application/json
+
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: id  of the user
+        required: true
+        type: string
+      - in: body
+        name: filters
+        schema:
+          type: object
+          properties:
+            startDate:
+              type: string
+              format: date-time
+            endDate:
+              type: string
+              format: date-time
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/ApiResponse'
+   
+  
+securityDefinitions:
+  bearerAuth:
+    type: apiKey
+    name: Authorization
+    in: header
+definitions:
+  ApiResponse:
+    type: object
+    properties:
+      type:
+        type: string
+      success:
+        type: boolean
+      error:
+        type: boolean
+      message:
+        type: string
+      data:
+        type: object
+
