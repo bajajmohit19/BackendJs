@@ -1,4 +1,4 @@
-import userCtrl from "../controllers/user";
+import chatCtrl from "../controllers/chat";
 import { Request, Response } from "express";
 
 export default (app: any) => {
@@ -6,14 +6,16 @@ export default (app: any) => {
         .route("/user")
         .post(async (req: Request, res: Response) => {
             const { body } = req;
-            let resp = await userCtrl.add({ ...body });
+            console.log(body)
+            let resp = await chatCtrl.add({ ...body });
             res.json(resp);
         })
     app
-        .route("/user/:id")
+        .route("/chatLogs")
         .post(async (req: Request, res: Response) => {
             const { body, params } = req;
-            let resp = await userCtrl.get(params.id, { ...body });
+            let resp = await chatCtrl.get(params.id, { ...body });
+            console.log(resp)
             res.json(resp);
         });
 }

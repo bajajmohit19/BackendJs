@@ -15,16 +15,16 @@ schemes:
 #  - https
 - http
 tags:
-- name: user
-  description: all functions related user accounts
+- name: chat
+  description: all functions related chat accounts
 
 paths:
   /user:
     post:
       tags:
       - "user"
-      summary: add new user
-      operationId: adduser
+      summary: add new chat
+      operationId: addchat
       consumes:
       - application/json
       produces:
@@ -36,36 +36,38 @@ paths:
         schema:
           type: object
           properties:
-            userId:
-              type: number
-            distance:
-              type: number
-            date:
+            intent_matched:
               type: string
-              format: date-time
+            psid:
+              type: string
+            sender:
+              type: string
+              # format: date-time
+            sessionId:
+              type: string
       responses:
         "200":
           description: successful operation
           schema:
             $ref: "#/definitions/ApiResponse"
     
-  /user/{id}:
+  /chatLogs:
     post:
       tags:
       - "user"
-      summary: Get user details
-      operationId: getUser
+      summary: Get chat details
+      operationId: getChat
       consumes:
       - application/json
 
       produces:
       - application/json
       parameters:
-      - in: path
-        name: id
-        description: id  of the user
-        required: true
-        type: string
+      # - in: path
+      #   name: id
+      #   description: id  of the user
+      #   required: true
+      #   type: string
       - in: body
         name: filters
         schema:

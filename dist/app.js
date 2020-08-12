@@ -8,7 +8,7 @@ const body_parser_1 = __importDefault(require("body-parser"));
 const path_1 = __importDefault(require("path"));
 const secrets_1 = require("./utils/secrets");
 const cors_1 = __importDefault(require("cors"));
-const user_1 = __importDefault(require("./app/routes/user"));
+const chatLogs_1 = __importDefault(require("./app/routes/chatLogs"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const yamljs_1 = __importDefault(require("yamljs"));
 const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
@@ -41,6 +41,6 @@ app.use(cors_1.default({
 app.set("port", process.env.PORT);
 app.use(express_1.default.static(path_1.default.join(__dirname, "../public"), { maxAge: 31557600000 }));
 mongoose_1.default.set('debug', true);
-user_1.default(app);
+chatLogs_1.default(app);
 app.use("/", swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swaggerDocument));
 exports.default = app;

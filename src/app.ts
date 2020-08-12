@@ -3,7 +3,7 @@ import bodyParser from "body-parser";
 import path from 'path';
 import { MONGODB_URI } from "./utils/secrets";
 import cors from "cors";
-import userRoutes from "./app/routes/user";
+import chatRoutes from "./app/routes/chatLogs";
 import mongoose from "mongoose";
 import YAML from "yamljs";
 import swaggerUi from "swagger-ui-express";
@@ -44,7 +44,7 @@ app.use(
 );
 mongoose.set('debug', true)
 
-userRoutes(app)
+chatRoutes(app)
 app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 export default app;
